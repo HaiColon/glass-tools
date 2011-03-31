@@ -36,12 +36,14 @@ comment [
 
 files: load %../tutorials/
 foreach file files [
-	header: first load/header join %../tutorials/ file
-	foreach widget header/widgets [
-		if/else found? find extract allitems 2 to-string widget [
-			append select allitems to-string widget to-string file
-		] [
-			append allitems reduce [to-string widget reduce [to-string file]]
+	if find file "tutorial" [
+		header: first load/header join %../tutorials/ file
+		foreach widget header/widgets [
+			if/else found? find extract allitems 2 to-string widget [
+				append select allitems to-string widget to-string file
+			] [
+				append allitems reduce [to-string widget reduce [to-string file]]
+			]
 		]
 	]
 ]
